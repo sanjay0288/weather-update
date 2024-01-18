@@ -18,8 +18,8 @@ pipeline {
             steps {
                 script {
                     def serverUrl = "35.154.163.101:8081"
-                    def username = "sanjay"
-                    def password = "sanjay"
+                    def username = "sanj"
+                    def password = "sanj"
                     def warFileName = "/home/workspace/bus_booking_Develop/target/weather-forecast-app-1.0-SNAPSHOT.jar"
 
                     sh "curl -v --user ${username}:${password} --upload-file ${warFileName} ${serverUrl}/manager/text/deploy?path=/${warFileName}"
