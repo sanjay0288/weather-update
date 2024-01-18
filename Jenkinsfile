@@ -21,7 +21,7 @@ pipeline {
                     def username = "sanj"
                     def password = "sanj"
                     def warFileName = "weather-forecast-app-1.0-SNAPSHOT.jar"
-                    def warFilePath = "/home/workspace/bus_booking_Develop/target/weather-forecast-app-1.0-SNAPSHOT.jar"
+                    def warFilePath = "/home/slave1/workspace/bus_booking_Develop/target/weather-forecast-app-1.0-SNAPSHOT.jar"
 
                     sh "curl -v --user ${username}:${password} --upload-file ${warFilePath} ${serverUrl}/manager/text/deploy?path=/${warFileName}"
                 }
