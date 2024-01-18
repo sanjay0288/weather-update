@@ -17,7 +17,7 @@ pipeline {
         stage('Deploy to Tomcat') {
             steps {
                 script {
-                    def serverUrl = "35.154.163.101:8081/"
+                    def serverUrl = "35.154.163.101:8081"
                     def username = "sanjay"
                     def password = "sanjay"
                     def warFileName = "weather-forecast-app-1.0-SNAPSHOT.jar"
