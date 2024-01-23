@@ -4,11 +4,13 @@ import com.example.model.WeatherResponse;
 import com.example.service.WeatherService;
 import com.example.util.WeatherUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class WeatherController {
+public class WeatherController extends SpringBootServletInitializer {
 
     private final WeatherService weatherService;
     private final WeatherUtils weatherUtils;
@@ -30,5 +32,9 @@ public class WeatherController {
 
         return response;
     }
-}
 
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(WeatherApplication.class);
+    }
+}
