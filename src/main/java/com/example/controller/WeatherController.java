@@ -29,8 +29,7 @@ public class WeatherController {
         response.setForecast(weatherForecast);
         response.setCondition(weatherCondition);
 
-        model.addAttribute("weatherResponse", response); // Add response to the model
-
-        return response;
+        model.addAttribute("weatherResponse", response);
+        return "weather"; // Return the name of the Thymeleaf template without extension
     }
 }
