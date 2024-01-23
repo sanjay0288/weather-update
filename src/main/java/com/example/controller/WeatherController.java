@@ -4,12 +4,12 @@ import com.example.model.WeatherResponse;
 import com.example.service.WeatherService;
 import com.example.util.WeatherUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.ui.Model; // Add this import statement
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class WeatherController extends SpringBootServletInitializer {
+public class WeatherController {
 
     private final WeatherService weatherService;
     private final WeatherUtils weatherUtils;
@@ -20,15 +20,17 @@ public class WeatherController extends SpringBootServletInitializer {
         this.weatherUtils = weatherUtils;
     }
 
-@GetMapping("/weather")
-public String getWeather(Model model) {
-    String weatherForecast = weatherService.getWeatherForecast();
-    String weatherCondition = weatherUtils.getWeatherCondition(weatherForecast);
+    @GetMapping("/weather")
+    public WeatherResponse getWeather(Model model) {
+        String weatherForecast = weatherService.getWeatherForecast();
+        String weatherCondition = weatherUtils.getWeatherCondition(weatherForecast);
 
-    WeatherResponse response = new WeatherResponse(weatherForecast, weatherCondition);
+        WeatherResponse response = new WeatherResponse();
+        response.setForecast(weatherForecast);
+        response.setCondition(weatherCondition);
 
-    model.addAttribute("weatherResponse", response);
-    return "weather";
-}
+        model.addAttribute("weatherResponse", response); // Add response to the model
 
+        return response;
+    }
 }
