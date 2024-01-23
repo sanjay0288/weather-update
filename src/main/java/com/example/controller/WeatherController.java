@@ -2,10 +2,11 @@ import com.example.model.WeatherResponse;
 import com.example.service.WeatherService;
 import com.example.util.WeatherUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class WeatherController {
 
     private final WeatherService weatherService;
@@ -18,10 +19,13 @@ public class WeatherController {
     }
 
     @GetMapping("/weather")
-    public WeatherResponse getWeather() {
+    public String getWeather(Model model) {
         String weatherForecast = weatherService.getWeatherForecast();
         String weatherCondition = weatherUtils.getWeatherCondition(weatherForecast);
 
-        return new WeatherResponse(weatherForecast, weatherCondition);
+        WeatherResponse response = new WeatherResponse(weatherForecast, weatherCondition);
+        model.addAttribute("weatherResponse", response);
+
+        return "weather"; // Thymeleaf template name without the extension
     }
 }
