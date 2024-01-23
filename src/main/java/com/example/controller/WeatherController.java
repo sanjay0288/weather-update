@@ -20,15 +20,15 @@ public class WeatherController extends SpringBootServletInitializer {
         this.weatherUtils = weatherUtils;
     }
 
-    @GetMapping("/weather")
-    public WeatherResponse getWeather() {
-        String weatherForecast = weatherService.getWeatherForecast();
-        String weatherCondition = weatherUtils.getWeatherCondition(weatherForecast);
+@GetMapping("/weather")
+public String getWeather(Model model) {
+    String weatherForecast = weatherService.getWeatherForecast();
+    String weatherCondition = weatherUtils.getWeatherCondition(weatherForecast);
 
-        WeatherResponse response = new WeatherResponse();
-        response.setForecast(weatherForecast);
-        response.setCondition(weatherCondition);
+    WeatherResponse response = new WeatherResponse(weatherForecast, weatherCondition);
 
-        return response;
-    }
+    model.addAttribute("weatherResponse", response);
+    return "weather";
+}
+
 }
